@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: resource-limits-deployment
+spec:
+  template:
+    metadata:
+      name: resource-limits-deployment
+      labels:
+        app: frontend
+    spec:
+      containers:
+       - name: nginx
+         image: nginx
+         resources:
+          requests:
+            memory: "64Mi"
+            cpu: "250m"
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+  replicas: 3
+  selector:
+   matchLabels:
+     app: frontend
+    

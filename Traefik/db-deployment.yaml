@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql-deploy
+  labels:
+    app: mysql
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mysql
+  template:
+    metadata:
+      labels:
+        app: mysql
+    spec:
+      containers:
+        - name: mysql
+          image: amolfunde/mysql:hrms  # Change to your MySQL image version
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              value: IceHrmR00t  # Set your MySQL root password
+            - name: MYSQL_DATABASE
+              value: icehrm  # Set your database name
+            - name: MYSQL_USER
+              value: prod  # Set your MySQL user
+            - name: MYSQL_PASSWORD
+              value: prod  # Set the user's password
+          ports:
+            - containerPort: 3306  # MySQL default port

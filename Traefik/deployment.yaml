@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hrms-deploy
+  labels:
+    env: demo
+    name: hrms-deploy
+spec:
+  template:
+    metadata:
+      labels:
+        env: demo
+        name: hrms-deploy
+    spec:
+      containers:
+       - image: amolfunde/icehrm-icehrm-prod:hrms
+         name: hrms-deploy
+  replicas: 1
+  selector:
+    matchLabels:
+      env: demo

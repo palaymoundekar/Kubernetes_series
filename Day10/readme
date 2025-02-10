@@ -1,0 +1,26 @@
+<!-- how to list namespace
+ kubectl get ns
+
+To check resources in a particular namespace
+kubectl get all -n=default
+
+How to create ns using cmd
+kubectl create namespace demo
+
+To create deployment using cmd.
+kubectl create deployment nginx-demo --image=nginx -n demo
+
+To create replicas using deployment 
+kubectl.exe scale --replicas=3 deploy/nginx-demo -n demo
+
+To create service using deployment cmd
+kubectl.exe expose deploy/nginx-demo --name=svc-demo  --port 80 -n=demo
+
+################################################
+
+Here we have created two namesapce demo and default and was trying to access connection within pods and service.
+we can access the pods of demo ns from default ns.
+Also,we can access the service of demo ns by default ns pods using curl svc-default.{dns_name}. You can get dns name from /etc/resolv.conf file. -->
+
+
+

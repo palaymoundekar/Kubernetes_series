@@ -1,0 +1,60 @@
+ALB-controller in private subnet steps
+
+2004  eksctl create cluster   --name palay-cluster   --region ap-south-1   --vpc-private-subnets=subnet-0733396a1e899b7b6,subnet-08e7e0e101055ceed   --without-nodegroup
+ 2005  eksctl create nodegroup   --cluster palay-cluster   --name palay-worker   --node-type t2.medium   --nodes 1   --managed   --subnet-ids subnet-08e7e0e101055ceed,subnet-0733396a1e899b7b6   --node-private-networking
+ 2006  kubectl get pods
+ 2007  kubectl get nodes
+ 2008  kubectl run nginx --image nginx:latest
+ 2009  eksctl utils associate-iam-oidc-provider --region ap-south-1 --cluster palay-cluster --approve
+ 2010  curl -o iam-policy.json https://raw.githubusercontent.com/kubernetes-sigs/aws-load-balancer-controller/main/docs/install/iam_policy.json
+ 2011  aws iam create-policy --policy-name AWSLoadBalancerControllerIAMPolicy --policy-document file://iam-policy.json
+ 2012  eksctl create iamserviceaccount   --region ap-south-1   --name aws-load-balancer-controller   --namespace kube-system   --cluster palay-cluster   --attach-policy-arn arn:aws:iam:011528285175:aws:policy/AWSLoadBalancerControllerIAMPolicy   --approve
+ 2013  eksctl create iamserviceaccount     --cluster=palay     --namespace=kube-system     --name=aws-load-balancer-controller     --attach-policy-arn=arn:aws:iam::011528285175:policy/AWSLoadBalancerControllerIAMPolicy     --override-existing-serviceaccounts     --approve
+ 2014  eksctl create iamserviceaccount     --cluster=palay-cluster     --namespace=kube-system     --name=aws-load-balancer-controller     --attach-policy-arn=arn:aws:iam::011528285175:policy/AWSLoadBalancerControllerIAMPolicy     --override-existing-serviceaccounts     --approve
+ 2015  kubectl get pods
+ 2016  kubectl get sa -n kube-system
+ 2017  curl -O https://raw.githubusercontent.com/kubernetes-sigs/aws-load-balancer-controller/v2.7.2/docs/install/iam_policy.json
+ 2018  aws iam create-policy     --policy-name AWSLoadBalancerControllerIAMPolicy     --policy-document file://iam_policy.json
+ 2019  eksctl create iamserviceaccount   --cluster=palay-cluster   --namespace=kube-system   --name=aws-load-balancer-controller   --role-name AmazonEKSLoadBalancerControllerRole   --attach-policy-arn=arn:aws:iam::011528285175:policy/AWSLoadBalancerControllerIAMPolicy   --approve
+ 2020  kubectl get sa aws-load-balancer-controller -n kube-system 
+ 2021  eksctl create iamserviceaccount   --cluster=palay-cluster   --namespace=kube-system   --name=aws-load-balancer-controller   --role-name AmazonEKSLoadBalancerControllerRole   --attach-policy-arn=arn:aws:iam::011528285175:policy/AWSLoadBalancerControllerIAMPolicy   --approve   --override-existing-serviceaccounts
+ 2022  kubectl get sa aws-load-balancer-controller -n kube-system
+ 2023  kubectl get sa aws-load-balancer-controller -n kube-system
+ 2024  eksctl get iamserviceaccount --cluster=palay-cluster
+ 2025  eksctl delete iamserviceaccount   --cluster=palay-cluster   --namespace=kube-system   --name=aws-load-balancer-controller
+ 2026  eksctl get iamserviceaccount --cluster=palay-cluster
+ 2027  eksctl create iamserviceaccount   --cluster=palay-cluster   --namespace=kube-system   --name=aws-load-balancer-controller   --role-name AmazonEKSLoadBalancerControllerRole   --attach-policy-arn=arn:aws:iam::011528285175:policy/AWSLoadBalancerControllerIAMPolicy   --approve   --override-existing-serviceaccounts
+ 2028  helm repo add eks https://aws.github.io/eks-charts
+ 2029  helm repo update eks
+ 2030  helm install aws-load-balancer-controller eks/aws-load-balancer-controller   -n kube-system   --set clusterName=palay-cluster   --set serviceAccount.create=false   --set serviceAccount.name=aws-load-balancer-controller
+ 2031  kubectl get deploy -n kube-system
+ 2032  kubectl get pods -n kube-system
+ 2033  kubectl get deploy -n kube-system
+ 2034  kubectl get pods -n kube-system
+ 2035  kubectl logs aws-load-balancer-controller-fc7c9fc9b-vbnll -n kube-system
+ 2036  kubectl get pods -n kube-system
+ 2037  kubectl logs aws-load-balancer-controller-fc7c9fc9b-xhz4c -n kube-system
+ 2038  ls
+ 2039  cat deployment.yaml 
+ 2040  cat ingress.yaml 
+ 2041  kubectl get all
+ 2042  kubectl apply -f deployment.yaml 
+ 2043  kubectl get all
+ 2044  kubectl apply -f ingress.yaml 
+ 2045  kubectl get ing
+ 2046  kubectl get pods -n kube-system
+ 2047  kubectl logs aws-load-balancer-controller-fc7c9fc9b-xhz4c -n kube-system,
+ 2048  kubectl logs aws-load-balancer-controller-fc7c9fc9b-xhz4c -n kube-system
+ 2049  cat ingress.yaml 
+ 2050  kubectl logs aws-load-balancer-controller-fc7c9fc9b-xhz4c -n kube-system
+ 2051  kubectl rollout restart deployment aws-load-balancer-controller -n kube-system
+ 2052  kubectl logs aws-load-balancer-controller-fc7c9fc9b-xhz4c -n kube-system
+ 2053  kubectl get pods -n kube-system
+ 2054  kubectl logs aws-load-balancer-controller-9f9d4f95d-h8x88 -n kube-system
+ 2055  kubectl get pods -n kube-system
+ 2056  kubectl logs aws-load-balancer-controller-9f9d4f95d-mt2hw -n kube-system
+ 2057  kubectl rollout restart deployment aws-load-balancer-controller -n kube-system
+ 2058  kubectl get pods -n kube-system
+ 2059  kubectl logs aws-load-balancer-controller-566695f7b9-6qk5x -n kube-system
+ 2060  history
+palay@palay:~/Documents/Terraform$ 

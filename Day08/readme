@@ -1,0 +1,20 @@
+# We can scale the replicas by 3 ways.
+#  1. edit the yaml file and then apply
+#  2. run k edit rc/nginx-rc(replicas-set name) and edit the chnanges.
+#  3. run k scale --replicas=5 rc/nginx-rc
+#  ---------------------------------------------------------------------------------------
+# To update image use cmd
+# k set image deploy/nginx-deploy nginx-deploy=nginx:1.9.1
+#   nginx-deploy--is conatiner name
+#   k rollout history deploy/nginx-deploy
+#   k rollout undo deploy/nginx-deploy #to revert the image
+
+diff between replica controller and replica set.
+
+Replica controller:-
+    1. It will create the pods that is defined in YAML file only.
+    2. It is old one.
+
+Replica Sets:
+    1. It has selector, it will create pods which is defined in YAMl file, Also it will take pods(existing pods) which has same label like (env=demo).So it will magaed the existing pods also.
+    2. Currently people prefer replica sets as it has selector.

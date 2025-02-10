@@ -1,0 +1,7 @@
+TO set shortcut of kubectl
+New-Alias -Name k -Value kubectl
+
+kubectl get pods -o wide
+kubectl describe pods nginx
+kubectl edit pods nginx
+

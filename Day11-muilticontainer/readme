@@ -1,0 +1,10 @@
+<!-- In multi container,we aaded two container in pod.one is myapp-container and init container.
+here Init container will start first then and then only myapp-container will start.
+
+How to get logs of containers
+kubectl.exe logs myapp -c init-myservice
+where myapp = pod name && init-myseervice = container name
+
+To print all env in pods
+kubectl.exe exec -it myapp -- printenv -->
+

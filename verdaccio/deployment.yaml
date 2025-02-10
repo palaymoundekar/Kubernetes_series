@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: verdaccio-deploy
+  labels:
+    env: dev
+    name: verdaccio-deploy
+spec:
+  template:
+    metadata:
+      labels:
+        env: dev
+        name: verdaccio-deploy
+    spec:
+      containers:
+       - image: verdaccio/verdaccio
+         name: verdaccio-deploy
+  replicas: 1
+  selector:
+    matchLabels:
+      env: dev

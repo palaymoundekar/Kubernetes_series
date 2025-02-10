@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: traefik-ingress
+  annotations:
+    kubernetes.io/ingress.class: traefik
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+spec:
+  rules:
+    - host: hrms.devopspalay.shop
+      http:
+        paths:
+        - backend:
+            service:
+              name: hrms-service
+              port:
+                number: 80
+          path: /
+          pathType: Prefix

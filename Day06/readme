@@ -1,0 +1,31 @@
+create single cluster 
+kind create cluster --name cluster1 --image kindest/node:v1.30.0@sha256:047357ac0cfea04663786a612ba1eaba9702
+
+To get the images
+https://github.com/kubernetes-sigs/kind/releases
+
+create multi node cluster
+kind create cluster --name cluster2 --image kindest/node:v1.30.0@sha256:047357ac0cfea04663786a612ba1eaba9702bef25227a794b52890dd8bcd692e --config=config.yaml
+
+to check list of clusters  
+kind get clusters
+
+TO get list of clusters using kubectl with details
+ 
+To switch from one cluster to another cluster.
+kubectl config use-context kind-cluster1
+
+To delete the cluster 
+kind delete cluster --name cluster2
+
+To list the context
+kubectl config get-contexts
+
+To check control plan resource health
+kubectl get componentstatus
+
+
+
+
+
+
